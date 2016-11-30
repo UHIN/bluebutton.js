@@ -1,7 +1,3 @@
-bower_components/
-lib/
-spec/
-tmp/
+spec
+src
 Gruntfile.js
-bower.json
-bluebutton.min.js
