@@ -21,7 +21,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         jshintrc: ".jshintrc",
-          reporterOutput: ""
+        reporterOutput: ""
       },
       beforeconcat: {
         src: ["<%= bb.src %>/{,*/}*.js"]
@@ -55,9 +55,12 @@ module.exports = function(grunt) {
           "<%= bb.src %>/parsers/c32.js",
           "<%= bb.src %>/parsers/c32/document.js",
           "<%= bb.src %>/parsers/c32/allergies.js",
+          "<%= bb.src %>/parsers/c32/care_plan.js",
           "<%= bb.src %>/parsers/c32/demographics.js",
+          "<%= bb.src %>/parsers/c32/family_history.js",
           "<%= bb.src %>/parsers/c32/encounters.js",
           "<%= bb.src %>/parsers/c32/immunizations.js",
+          "<%= bb.src %>/parsers/c32/insurance_providers.js",
           "<%= bb.src %>/parsers/c32/results.js",
           "<%= bb.src %>/parsers/c32/medications.js",
           "<%= bb.src %>/parsers/c32/problems.js",

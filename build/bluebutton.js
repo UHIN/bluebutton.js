@@ -1248,6 +1248,10 @@ Documents.C32 = (function () {
         }
         el.entries = entries;
         return el;
+      case 'care_plan':
+        el = this.template('2.16.840.1.113883.3.88.11.83.124');
+        el.entries = entries;
+        return el;
       case 'demographics':
         return this.template('2.16.840.1.113883.3.88.11.32.1');
       case 'encounters':
@@ -1257,11 +1261,19 @@ Documents.C32 = (function () {
         }
         el.entries = entries;
         return el;
+      case 'family_history':
+        el = this.template('2.16.840.1.113883.3.88.11.83.125');
+        el.entries = entries;
+        return el;
       case 'immunizations':
         el = this.template('2.16.840.1.113883.3.88.11.83.117');
         if (el.isEmpty()) {
           el = this.template('2.16.840.1.113883.10.20.1.6');
         }
+        el.entries = entries;
+        return el;
+      case 'insurance_providers':
+        el = this.template('2.16.840.1.113883.10.20.1.9');
         el.entries = entries;
         return el;
       case 'results':
@@ -1687,10 +1699,13 @@ Parsers.C32 = (function () {
     
     data.document              = Parsers.C32.document(c32);
     data.allergies             = Parsers.C32.allergies(c32);
+    data.care_plan             = Parsers.C32.care_plan(c32);
     data.demographics          = Parsers.C32.demographics(c32);
     data.encounters            = Parsers.C32.encounters(c32);
+    data.family_history        = Parsers.C32.family_history(c32);
     data.immunizations         = Parsers.C32.immunizations(c32).administered;
     data.immunization_declines = Parsers.C32.immunizations(c32).declined;
+    data.insurance_providers   = Parsers.C32.insurance_providers(c32);
     data.results               = Parsers.C32.results(c32);
     data.medications           = Parsers.C32.medications(c32);
     data.problems              = Parsers.C32.problems(c32);
@@ -1700,10 +1715,13 @@ Parsers.C32 = (function () {
     data.json                       = Core.json;
     data.document.json              = Core.json;
     data.allergies.json             = Core.json;
+    data.care_plan.json             = Core.json;
     data.demographics.json          = Core.json;
     data.encounters.json            = Core.json;
+    data.family_history.json        = Core.json;
     data.immunizations.json         = Core.json;
     data.immunization_declines.json = Core.json;
+    data.insurance_providers.json   = Core.json;
     data.results.json               = Core.json;
     data.medications.json           = Core.json;
     data.problems.json              = Core.json;
@@ -1725,9 +1743,6 @@ Parsers.C32 = (function () {
       text: null
     };
     data.chief_complaint.json = Core.json;
-
-    data.care_plan = [];
-    data.care_plan.json = Core.json;
 
     data.instructions = [];
     data.instructions.json = Core.json;
@@ -1935,6 +1950,27 @@ Parsers.C32.allergies = function (c32) {
 ;
 
 /*
+ * Parser for the C32 family history section
+ */
+
+Parsers.C32.care_plan = function (c32) {
+
+  var parseDate = Documents.parseDate;
+  var parseName = Documents.parseName;
+  var parseAddress = Documents.parseAddress;
+  var data = [], el;
+
+  var care_plan = c32.section('care_plan');
+
+  care_plan.entries().each(function(entry) {
+    data.push({});
+  });
+
+  return data;
+};
+;
+
+/*
  * Parser for the C32 demographics section
  */
 
@@ -2030,6 +2066,27 @@ Parsers.C32.demographics = function (c32) {
     }
   };
   
+  return data;
+};
+;
+
+/*
+ * Parser for the C32 family history section
+ */
+
+Parsers.C32.family_history = function (c32) {
+
+  var parseDate = Documents.parseDate;
+  var parseName = Documents.parseName;
+  var parseAddress = Documents.parseAddress;
+  var data = [], el;
+
+  var family_history = c32.section('family_history');
+
+  family_history.entries().each(function(entry) {
+    data.push({});
+  });
+
   return data;
 };
 ;
@@ -2229,6 +2286,27 @@ Parsers.C32.immunizations = function (c32) {
     administered: administeredData,
     declined: declinedData
   };
+};
+;
+
+/*
+ * Parser for the C32 family history section
+ */
+
+Parsers.C32.insurance_providers = function (c32) {
+
+  var parseDate = Documents.parseDate;
+  var parseName = Documents.parseName;
+  var parseAddress = Documents.parseAddress;
+  var data = [], el;
+
+  var insurance_providers = c32.section('insurance_providers');
+
+  insurance_providers.entries().each(function(entry) {
+    data.push({});
+  });
+
+  return data;
 };
 ;
 
