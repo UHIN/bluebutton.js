@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "xmldom": "~0.1.19",
-    "ejs": "^1.0.0"
+    "ejs": "github:UHIN/ejs#18c439893b42402b677c16da631af17553d07854"
   },
   "devDependencies": {
     "bower": "*",
